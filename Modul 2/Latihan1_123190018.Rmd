@@ -145,7 +145,7 @@ argumen berupa jumlah baris dan kolom yang diinginkan.
 ```{r}
     mat <- matrix(1:12, 4, 3)
     mat
- ``` 
+``` 
 
 Untuk mengakses entri tertentu dalam matriks, dapat digunakan tanda kurung siku ([). Sebagai
 contoh, kita akan menampilkan data pada baris kedua, kolom ketiga, menggunakan:
