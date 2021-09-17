@@ -48,7 +48,6 @@ lebih rinci mengenai struktur suatu objek:
 
 ```{r}
     str(murders)
-
 ```
 Dengan menggunakan fungsi str, dapat diketahui bahwa dataset "murders" terdiri dari 51 baris
 dan lima variabel: state, abb, region, population, dan total. Selanjutnya, untuk melihat contoh
