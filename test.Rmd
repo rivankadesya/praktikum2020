@@ -1,0 +1,36 @@
+---
+title: "Tugas Modul 3"
+author: "Rivanka Desya"
+date: "9/23/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dslabs)
+data(murders)
+str(murders)
+length(murders$state)
+murders$state
+murders
+
+names(murders)
+a = murders$abb
+class(a)
+
+
+b = murders[[2]]
+class(b)
+
+a
+b
+
+
+length(levels(murders$region))
+
+table(murders$region)
+```
+
