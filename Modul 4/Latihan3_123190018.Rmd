@@ -1,0 +1,99 @@
+---
+title: "Tugas Modul 4"
+author: "Rivanka Desya"
+date: "9/30/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+
+```{r}
+library(dslabs)
+data("murders")
+```
+
+## 1. Gunakan operator aksesor ($) untuk mengakses variabel populasi dan menyimpannya pada objek baru “pop”. Kemudian gunakan fungsi sort untuk mengurutkan variabel “pop”. Pada langkah terakhir, gunakan  operator ([) untuk menampilkan nilai populasi terkecil. 
+
+```{r}
+pop = murders$population
+pop = sort(pop)
+pop[1]
+```
+
+## 2. Tampilkan indeks dari data yang memiliki nilai populasi terkecil. Petunjuk: gunakan fungsi order. 
+```{r}
+indeks = order(murders$population)
+indeks[1]
+```
+
+## 3. Dengan fungsi which.min, Tulis satu baris kode yang dapat menampilkan hasil yang sama dengan langkah diatas.
+
+```{r}
+which.min(murders$population)
+```
+
+## 4. Tampilkan nama negara yang memiliki populasi terkecil. 
+
+```{r}
+i_min = which.min(murders$population)
+murders$state[i_min]
+```
+
+## 5. Untuk membuat data frame baru, contoh script yang dapat digunakan adalah sebagai berikut: 
+```{r}
+temp <- c(35, 88, 42, 84, 81, 30)
+city <- c("Beijing", "Lagos", "Paris", "Rio de Janeiro",
+"San Juan", "Toronto")
+city_temps <- data.frame(name = city, temperature = temp)
+```
+
+Gunakan fungsi rank untuk menentukan peringkat populasi dari tiap negara bagian, dimulai
+dari nilai terkecil hingga terbesar. Simpan hasil pemeringkatan di objek baru “ranks”, lalu buat
+data frame baru yang berisi nama negara bagian dan peringkatnya dengan nama “my_df”. 
+
+```{r}
+temp = murders$state
+ranks = rank(murders$population)
+my_df <- data.frame(name=temp, ranks)
+my_df
+```
+
+## 6. Ulangi langkah sebelumnya, namun kali ini urutkan my_df dengan fungsi order agar data yang ditampilkan merupakan data yang telah diurutkan dari populasi yang paling tidak padat hingga ke yang terpadat. Petunjuk: buat obj
+```{r}
+ind = order(my_df$ranks)
+new_rank = my_df$ranks[ind]
+new_name= my_df$name[ind]
+my_df=data.frame(name=new_name, ranks=new_rank)
+my_df
+```
+
+## 7. Untuk keperluan analisis data, akan dibuat plot yang memvisualisasikan total pembunuhan terhadap populasi dan mengidentifikasi hubungan antara keduanya. Script yang digunakan: 
+```{r}
+population_in_millions <- murders$population/10^6
+total_gun_murders <- murders$total
+plot(population_in_millions, total_gun_murders)
+```
+Perlu diingat bahwa beberapa negara bagian memiliki populasi di bawah 5 juta, sehingga untuk mempermudah analisis, buat plot dalam skala log. Transformasi nilai variabel menggunakan transformasi log10,kemudian tampilkan plot-nya. 
+```{r}
+plot(log10(population_in_millions), log10(total_gun_murders))
+```
+
+## 8. Buat histogram dari populasi negara bagian. 
+```{r}
+Population = murders$population/10^6
+hist(Population)
+```
+
+## 9. Hasilkan boxplot dari populasi negara bagian berdasarkan wilayahnya. 
+```{r}
+murders$rate <- with(murders, murders$population/10^6)
+boxplot(rate~region, data = murders)
+```
