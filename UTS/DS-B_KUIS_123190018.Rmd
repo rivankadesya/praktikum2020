@@ -46,7 +46,11 @@ class(us_contagious_diseases$disease)
 
 4. Tampilkan 10 data penyakit rubella teratas diurutkan berdasarkan jumlah kasusnya dan terjadi pada antara tahun 2000 dan 2005! **point 11**
 ```{r}
-us_contagious_diseases %>% filter(disease == "Rubella") %>% filter(year >= 2000 & year <= 2005) %>% arrange(desc(count)) %>% head(us_contagious_diseases,n=10)
+us_contagious_diseases %>% 
+  filter(disease == "Rubella") %>% 
+  filter(year >= 2000 & year <= 2005) %>% 
+  arrange(desc(count)) %>% 
+  head(us_contagious_diseases,n=10)
 
 ```
 
@@ -58,14 +62,17 @@ us_contagious_diseases %>% filter(disease == "Rubella") %>% filter(year >= 2000 
 NB : jika dirasa jumlah data hasilnya terlalu banyak boleh menggunakan fungsi top_n() atau head()**point 10**
 
 ```{r}
-head(ifelse(us_contagious_diseases$count<500, "Biasa", ifelse(us_contagious_diseases$count>2000, "Azab", "Cobaan"))) 
+head(ifelse(us_contagious_diseases$count<500, "Biasa", 
+            ifelse(us_contagious_diseases$count>2000, "Azab", "Cobaan"))) 
 ```
 
 6. Tambahkan variabel baru berisi data 'us_contagious_diseases' dengan tambahan kolom baru dengan nama "category" yang isinya merupakan implementasi nomor 5 dan kolom "rate" yang isinya merupakan hasil bagi jumlah kasus dengan populasi dikalikan 100000! **point 10**
 ```{r}
-category = category = ifelse(us_contagious_diseases$count < 500 , "Biasa", ifelse(us_contagious_diseases$count > 2000 , "Azab","Cobaan"))
+category = category = ifelse(us_contagious_diseases$count < 500 , "Biasa", 
+                             ifelse(us_contagious_diseases$count > 2000 , "Azab","Cobaan"))
 
-newdf = mutate(us_contagious_diseases,category , us_contagious_diseases, rate =((count/population)*100000))
+newdf = mutate(us_contagious_diseases,category , 
+               us_contagious_diseases, rate =((count/population)*100000))
 head(newdf, n=100)
 
 ```
